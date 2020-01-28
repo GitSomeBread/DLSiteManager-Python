@@ -9,12 +9,13 @@ def rename_directory(format, path):
     if not has_series:
         return None
         
-    parser = DLSiteHtmlParser.LoadFromURL("http://www.google.com")
+    parser = DLSiteHtmlParser.LoadFromSeries(series)
     new_path = format.upper()
     new_path = new_path.replace("<RJ>".upper(), series)
     new_path = new_path.replace("<CYCLE>".upper(), parser.cycle)
     new_path = new_path.replace("<NAME>".upper(), parser.product_name)
     new_path = new_path.replace("<SEIYUU>".upper(), "&".join(parser.seiyuus))
+    new_path = path.replace(os.path.basename(path), new_path)
 
     star = "★"
     if star in path:
@@ -22,7 +23,7 @@ def rename_directory(format, path):
         new_path += star
 
     print("new_path= " + new_path)
-    os.renames(path, new_path)   
+    os.renames(path, new_path)
     return new_path
 
 def rename_directories(format, *args):

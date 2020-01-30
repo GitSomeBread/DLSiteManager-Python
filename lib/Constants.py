@@ -1,0 +1,1 @@
+default_format = "<RJ> [<Cycle>] <Name> <Seiyuu>"
